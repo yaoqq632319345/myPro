@@ -1,36 +1,31 @@
 <html lang="en">
   <head>
-    <head>
-      <meta charset="UTF-8" />
-      <meta
-        name="viewport"
-        content="width=750, user-scalable=no, viewport-fit=cover"
-      />
-      <meta name="format-detection" content="telephone=no" />
-      <title>月嫂</title>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
-      />
-      <link rel="stylesheet" href="./static/index.css" />
-      <link
-        rel="stylesheet"
-        href="https://fastly.jsdelivr.net/npm/vant@3/lib/index.css"
-      />
-    </head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=750, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <title>月嫂</title>
+    <link rel="stylesheet" href="./static/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fastly.jsdelivr.net/npm/vant@3/lib/index.css"
+    />
   </head>
   <body>
     <div id="app">
       <header class="header">
-        <div class="header-swiper">
-          <div class="swiper-wrapper">
-            <div
-              class="swiper-slide"
-              v-for="item in userJson"
-              v-text="item"
-            ></div>
-          </div>
-        </div>
+        <van-swipe
+          class="my-swipe"
+          :autoplay="3000"
+          indicator-color="white"
+          vertical
+        >
+          <van-swipe-item v-for="(item, index) in userJson"
+            >{{item}}</van-swipe-item
+          >
+        </van-swipe>
       </header>
       <section class="section submit-container">
         <div class="title">
@@ -48,10 +43,11 @@
         <section class="container yuesao-submit">
           <div class="type item">
             <p class="title">类型:</p>
-            <van-checkbox-group v-model="checked" direction="horizontal">
+            <van-checkbox-group v-model="form.checked" direction="horizontal">
               <van-checkbox
                 icon-size="30px"
                 checked-color="#ee0a24"
+                :name="item"
                 v-for="item in checkbox.checkboxes"
                 >{{item}}</van-checkbox
               >
@@ -64,25 +60,53 @@
                 type="text"
                 placeholder="请填写您的手机号码"
                 class="phone-inputer"
+                v-model="form.phone"
               />
             </div>
           </div>
           <div class="item date">
             <p class="item-title">预产期:</p>
-            <div data-v-13fee07d="" class="input-item">
-              <p data-v-13fee07d="" class="text tip">请选择预产期</p>
-              <div data-v-13fee07d="" class="arrow"></div>
+            <div class="input-item" @click="dateShowPicker">
+              <p class="text tip">请选择预产期</p>
+              <div class="arrow"></div>
             </div>
+            <van-popup
+              v-model:show="dateShow"
+              position="bottom"
+              round
+              :style="{ height: '30%' }"
+            >
+              <van-datetime-picker
+                item-height="80px"
+                v-model="form.date"
+                type="date"
+                title="选择年月日"
+            /></van-popup>
           </div>
           <div class="item area">
             <p class="item-title">所在地区:</p>
-            <div data-v-13fee07d="" class="input-item">
-              <p data-v-13fee07d="" class="text tip">请选择地区</p>
-              <div data-v-13fee07d="" class="arrow"></div>
+            <div class="input-item" @click="cityShowPicker">
+              <p class="text tip">请选择地区</p>
+              <div class="arrow"></div>
             </div>
+            <van-popup
+              v-model:show="cityShow"
+              position="bottom"
+              round
+              :style="{ height: '80%' }"
+            >
+              <div class="city-wrap">
+                <van-index-bar>
+                  <template v-for="item in cityJson">
+                    <van-index-anchor :index="item.letter" />
+                    <span v-for="city in item.list" v-text="city"></span>
+                  </template>
+                </van-index-bar>
+              </div>
+            </van-popup>
           </div>
-          <div class="submit-button">获取报价</div>
-          <div data-v-37edc2c6="" class="sign-agreements">
+          <div class="submit-button" @click="submit">获取报价</div>
+          <div class="sign-agreements">
             <p data-v-37edc2c6="">
               点击同意提交，即代表您已知悉并同意由妈妈网收集以上信息并提供给【第三方服务提供商】以提供咨询服务，妈妈网将为您推荐至多3个合适的商家，请留意商家的联系电话
               <span data-v-37edc2c6="" style="color: rgb(254, 79, 2)"
@@ -93,279 +117,49 @@
           <div class="doppler-tip-popup"></div>
         </section>
       </section>
-      <section data-v-89d17394="" class="section comment">
-        <section
-          data-v-7e14a685=""
-          data-v-89d17394=""
-          class="comment-container"
-        >
-          <div data-v-7e14a685="" class="comment-title"></div>
-          <div
-            data-v-7e14a685=""
-            class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-ios"
-          >
-            <div data-v-7e14a685="" class="swiper-wrapper">
-              <div
-                data-v-7e14a685=""
-                class="swiper-slide swiper-slide-active"
-                style="width: 650px; margin-right: 100px"
-              >
-                <section data-v-7e14a685="" class="user">
-                  <div
-                    data-v-7e14a685=""
-                    class="avatar"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-1-avatar~cc05af54.png');
+      <section class="section comment">
+        <section class="comment-container">
+          <div class="comment-title"></div>
+          <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+            <van-swipe-item v-for="(item, index) in data"
+              ><section class="user">
+                <div
+                  class="avatar"
+                  :style="
+                      {backgroundImage: `url(./static/head/head${index+1}.webp)`}
                     "
-                  ></div>
-                  <div data-v-7e14a685="" class="user-info">
-                    <p data-v-7e14a685="" class="username">豆小包妈咪</p>
-                    <p data-v-7e14a685="" class="age">
-                      <span data-v-7e14a685="" class="age-text">育2月</span>
-                    </p>
-                  </div>
-                </section>
-                <p data-v-7e14a685="" class="comment-content">
-                  我是通过妈妈网找到月嫂姚阿姨，姚阿姨是上海本地人，做事很勤快，而且超级爱干净。这点很深得我心，姚阿姨话不多，但是对宝宝的照顾可谓是无微不至，还会和我讲育儿的技巧，我是双月子，姚阿姨教会了很多，以至于到现在宝宝6个多月，也没有遇到什么很难处理的问题。阿姨做菜色香味俱全，我真的觉得能遇到这个月嫂是运气好！月子下来身体也没有什么不适应，没有别人说的腰酸之类的~如果我有二胎我还是会找姚阿姨！
-                </p>
-                <ul data-v-7e14a685="" class="image-list">
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-1-pic1~d62b7c33.png');
+                ></div>
+                <div class="user-info">
+                  <p class="username">{{item.name}}</p>
+                  <p class="age">
+                    <span class="age-text">{{item.age}}</span>
+                  </p>
+                </div>
+              </section>
+              <p class="comment-content">{{item.p}}</p>
+              <ul class="image-list">
+                <div
+                  v-for="img in 3"
+                  class="image-item"
+                  :style="
+                      {backgroundImage: `url(./static/img/${index+1}-${img}.webp)`}
                     "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-1-pic2~b9f09bfe.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-1-pic3~4f9d6a73.png');
-                    "
-                  ></div>
-                </ul>
-              </div>
-              <div
-                data-v-7e14a685=""
-                class="swiper-slide swiper-slide-next"
-                style="width: 650px; margin-right: 100px"
-              >
-                <section data-v-7e14a685="" class="user">
-                  <div
-                    data-v-7e14a685=""
-                    class="avatar"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-2-avatar~35948b45.png');
-                    "
-                  ></div>
-                  <div data-v-7e14a685="" class="user-info">
-                    <p data-v-7e14a685="" class="username">家有萌娃蒲优</p>
-                    <p data-v-7e14a685="" class="age">
-                      <span data-v-7e14a685="" class="age-text">育2月</span>
-                    </p>
-                  </div>
-                </section>
-                <p data-v-7e14a685="" class="comment-content">
-                  生孩子的时候，张阿姨就来医院陪护了，那几天也是多亏了张阿姨的陪护，家里人手忙脚乱，都不知道做什么，我刚生产完话都说不出来，都是张阿姨在照顾我和宝宝。真的很专业的，喂奶姿势、乳房护理按摩、宝宝护理喂奶辅助、做月子餐都很靠谱，完全不用我和家里人操心。因为有张阿姨的护理，这个月子坐得很好，也没有碰到什么问题，太太太感谢张阿姨了！身边如果有朋友要找月嫂，我都第一时间想到张阿姨！
-                </p>
-                <ul data-v-7e14a685="" class="image-list">
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-2-pic1~9ea54aef.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-2-pic2~01871222.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-2-pic3~50e0f433.png');
-                    "
-                  ></div>
-                </ul>
-              </div>
-              <div
-                data-v-7e14a685=""
-                class="swiper-slide"
-                style="width: 650px; margin-right: 100px"
-              >
-                <section data-v-7e14a685="" class="user">
-                  <div
-                    data-v-7e14a685=""
-                    class="avatar"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-3-avatar~5438c46b.png');
-                    "
-                  ></div>
-                  <div data-v-7e14a685="" class="user-info">
-                    <p data-v-7e14a685="" class="username">芮芮哒翔宝</p>
-                    <p data-v-7e14a685="" class="age">
-                      <span data-v-7e14a685="" class="age-text">育4月</span>
-                    </p>
-                  </div>
-                </section>
-                <p data-v-7e14a685="" class="comment-content">
-                  新手爸妈手忙脚乱的不行，快生的时候才急急忙忙开始找月嫂，还好有朋友推荐，沟通之后定下来李阿姨，非常感谢她能在疫情最严重的时候来到我家，阿姨在我家一直戴着口罩，十分注重卫生和安全，真的让人非常安心了，因为我是剖腹产，月子里伤口特别疼，还好有李阿姨精心的照料，不然我要受不少罪了。李阿姨特别温柔，没事就陪我说话解闷，对宝宝也很好，能找到这样的月嫂，真的很满意！
-                </p>
-                <ul data-v-7e14a685="" class="image-list">
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-3-pic1~f8361373.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-3-pic2~382e93e8.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-3-pic3~15d3e9b6.png');
-                    "
-                  ></div>
-                </ul>
-              </div>
-              <div
-                data-v-7e14a685=""
-                class="swiper-slide"
-                style="width: 650px; margin-right: 100px"
-              >
-                <section data-v-7e14a685="" class="user">
-                  <div
-                    data-v-7e14a685=""
-                    class="avatar"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-4-avatar~ea6b57bf.png');
-                    "
-                  ></div>
-                  <div data-v-7e14a685="" class="user-info">
-                    <p data-v-7e14a685="" class="username">牧爸爸</p>
-                    <p data-v-7e14a685="" class="age">
-                      <span data-v-7e14a685="" class="age-text">育2月</span>
-                    </p>
-                  </div>
-                </section>
-                <p data-v-7e14a685="" class="comment-content">
-                  月嫂机构给我推荐了曾姐，一开始对陌生的月嫂来家里照顾宝宝有些不放心，经过几天的接触我就彻底放下心了，曾阿姨不仅月子餐做的好，对宝宝也特别有耐心，做操、按摩、早教、唱儿歌……除了给我做饭照顾我之外，其余的时间基本上都是在陪宝宝，彻底解放了我婆婆，有了曾姐，她乐的轻松自在。整个月子，在曾姐的照料下我几乎没有任何不适，除了头两天伤口有点疼痛，之后都是吃的香睡得好，我们全家人都对曾姐特别满意！如果我生二胎一定再找曾姐！
-                </p>
-                <ul data-v-7e14a685="" class="image-list">
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-4-pic1~fe144a65.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-4-pic2~6f51c9c5.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-4-pic3~6615b80d.png');
-                    "
-                  ></div>
-                </ul>
-              </div>
-              <div
-                data-v-7e14a685=""
-                class="swiper-slide"
-                style="width: 650px; margin-right: 100px"
-              >
-                <section data-v-7e14a685="" class="user">
-                  <div
-                    data-v-7e14a685=""
-                    class="avatar"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-5-avatar~41cc2845.png');
-                    "
-                  ></div>
-                  <div data-v-7e14a685="" class="user-info">
-                    <p data-v-7e14a685="" class="username">月韵梦影影</p>
-                    <p data-v-7e14a685="" class="age">
-                      <span data-v-7e14a685="" class="age-text">育1月</span>
-                    </p>
-                  </div>
-                </section>
-                <p data-v-7e14a685="" class="comment-content">
-                  我是二胎妈妈，第一胎的时候，年纪轻没请月嫂，真心觉得累，因为没人指导，所以养娃之路上走了不少弯路。这次二胎，果断找了月嫂，真心觉得月嫂很有必要。照顾我的是戴阿姨，不仅饭烧的好吃，照顾起宝宝也是经验十足。月子里面我的胃口相当好，这要归功于戴阿姨，关键是我每天吃这么多，也没怎么长胖，奶水充足的，每天戴阿姨会陪着我和宝宝出门逛30分钟，让我坚持运动。基本在这两个月里，我没怎么操心，休息的很充分，身体也比一胎的时候好很多~
-                </p>
-                <ul data-v-7e14a685="" class="image-list">
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-5-pic1~ff8a3d8c.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-5-pic2~2d3205a1.png');
-                    "
-                  ></div>
-                  <div
-                    data-v-7e14a685=""
-                    class="image-item"
-                    style="
-                      background-image: url('//static.cdnmama.com/yuesao2/dist/asset/img/price/comment-5-pic3~ef6fc303.png');
-                    "
-                  ></div>
-                </ul>
-              </div>
-            </div>
-            <div
-              data-v-7e14a685=""
-              class="swiper-pagination swiper-pagination-bullets"
-            >
-              <span
-                class="swiper-bullet-price swiper-bullet-active-price"
-              ></span
-              ><span class="swiper-bullet-price"></span
-              ><span class="swiper-bullet-price"></span
-              ><span class="swiper-bullet-price"></span
-              ><span class="swiper-bullet-price"></span>
-            </div>
-            <span
-              class="swiper-notification"
-              aria-live="assertive"
-              aria-atomic="true"
-            ></span>
-          </div>
+                ></div></ul
+            ></van-swipe-item>
+          </van-swipe>
         </section>
       </section>
+      <section class="map section map">
+        <div class="map-title"></div>
+        <img src="./static/banner.webp" alt="" />
+      </section>
+      <footer class="footer footer">
+        <div class="footer-button" @click="submit">获取报价</div>
+      </footer>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./static/data.js"></script>
     <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.js"></script>
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://fastly.jsdelivr.net/npm/vant@3/lib/vant.min.js"></script>
 
     <script src="./static/index.js"></script>
