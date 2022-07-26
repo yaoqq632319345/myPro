@@ -24,7 +24,11 @@
       <header class="header">
         <div class="header-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item in user">{{item}}</div>
+            <div
+              class="swiper-slide"
+              v-for="item in userJson"
+              v-text="item"
+            ></div>
           </div>
         </div>
       </header>
@@ -38,40 +42,21 @@
           </p>
           <p class="price-text">
             <span class="icon">￥</span>
-            <span class="num">{{price}}</span>
+            <span class="num" v-text="price"></span>
           </p>
         </div>
-        <section
-          data-v-7781fbdd=""
-          data-v-89d17394=""
-          class="container yuesao-submit"
-        >
-          <div data-v-7781fbdd="" class="type">
-            <p data-v-7781fbdd="" class="title">类型:</p>
-            <ul data-v-7781fbdd="" class="type-list">
-              <div data-v-7781fbdd="" class="type-item active">
-                <div data-v-7781fbdd="" class="selector"></div>
-                <p data-v-7781fbdd="" class="text">月嫂</p>
-              </div>
-              <div data-v-7781fbdd="" class="type-item">
-                <div data-v-7781fbdd="" class="selector"></div>
-                <p data-v-7781fbdd="" class="text">育儿嫂</p>
-              </div>
-              <div data-v-7781fbdd="" class="type-item">
-                <div data-v-7781fbdd="" class="selector"></div>
-                <p data-v-7781fbdd="" class="text">保姆</p>
-              </div>
-              <div data-v-7781fbdd="" class="type-item">
-                <div data-v-7781fbdd="" class="selector"></div>
-                <p data-v-7781fbdd="" class="text">家政保洁</p>
-              </div>
-            </ul>
+        <section class="container yuesao-submit">
+          <div class="type">
+            <p class="title">类型:</p>
+            <van-checkbox-group v-model="checked" direction="horizontal">
+              <van-checkbox
+                checked-color="#ee0a24"
+                v-for="item in checkbox.checkboxes"
+                >{{item}}</van-checkbox
+              >
+            </van-checkbox-group>
           </div>
-          <section
-            data-v-479ac23e=""
-            data-v-7781fbdd=""
-            class="submit price-submit"
-          >
+          <section class="submit price-submit">
             <div data-v-479ac23e="" class="item phone">
               <p data-v-479ac23e="" class="item-title">手机号码:</p>
               <div data-v-479ac23e="" class="input-item">
@@ -142,7 +127,8 @@
         </section>
       </section>
     </div>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./static/data.js"></script>
     <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.js"></script>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://fastly.jsdelivr.net/npm/vant@3/lib/vant.min.js"></script>
