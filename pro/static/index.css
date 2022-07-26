@@ -147,3 +147,43 @@ input {
   text-align: left;
   margin-top: 20px;
 }
+/* ================================= */
+.comment-title {
+  background: url(./title.webp) no-repeat 50%;
+  height: 46px;
+  margin: 0 auto 30px;
+  width: 459px;
+}
+.comment .swiper-slide .user .user-info .age {
+  color: #999;
+  font-size: 26px;
+  margin-left: 16px;
+}
+.comment .swiper-slide .user .user-info .username {
+  color: #333;
+  font-size: 26px;
+  margin-left: 25px;
+}
+.user,
+.user-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+.comment .swiper-slide .user .avatar {
+  background-color: #ccc;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+.comment .swiper-slide .comment-content {
+  color: #333;
+  font-size: 30px;
+  line-height: 48px;
+  margin-top: 30px;
+  text-align: justify;
+}
