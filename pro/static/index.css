@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  background: url(./banner.webp) no-repeat 50%;
+  height: 531px;
+  position: relative;
+}
+
+.header .header-swiper {
+  bottom: 130px;
+  height: 60px;
+  left: 30px;
+  position: absolute;
+  overflow: hidden;
+}
+.header .swiper-slide {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  color: #fff;
+  display: inline-block;
+  font-size: 22px;
+  line-height: 60px;
+  padding: 0 22px;
+}
+.section {
+  margin-top: -80px;
+  padding: 80px 50px 120px;
+  position: relative;
+}
+.section:nth-child(odd) {
+  background-color: #f1f4ff;
+  border-top-left-radius: 0;
+  border-top-right-radius: 80px;
+}
+.section:nth-child(2n) {
+  background-color: #fff;
+  border-top-left-radius: 80px;
+  border-top-right-radius: 0;
+}
+.submit-container .title {
+  color: #333;
+  font-weight: 700;
+  text-align: center;
+}
+.submit-container .title .text {
+  font-size: 36px;
+}
+.submit-container .title .highlight {
+  color: #fe4f02;
+}

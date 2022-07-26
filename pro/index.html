@@ -1,0 +1,152 @@
+<html lang="en">
+  <head>
+    <head>
+      <meta charset="UTF-8" />
+      <meta
+        name="viewport"
+        content="width=750, user-scalable=no, viewport-fit=cover"
+      />
+      <meta name="format-detection" content="telephone=no" />
+      <title>月嫂</title>
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+      />
+      <link rel="stylesheet" href="./static/index.css" />
+      <link
+        rel="stylesheet"
+        href="https://fastly.jsdelivr.net/npm/vant@3/lib/index.css"
+      />
+    </head>
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <div class="header-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="item in user">{{item}}</div>
+          </div>
+        </div>
+      </header>
+      <section class="section submit-container">
+        <div class="title">
+          <p class="title-text">
+            <span class="text">查一查</span>
+            <span class="text">本地，</span>
+            <span class="text">请个专业月嫂</span>
+            <span class="text highlight">多少钱?</span>
+          </p>
+          <p class="price-text">
+            <span class="icon">￥</span>
+            <span class="num">{{price}}</span>
+          </p>
+        </div>
+        <section
+          data-v-7781fbdd=""
+          data-v-89d17394=""
+          class="container yuesao-submit"
+        >
+          <div data-v-7781fbdd="" class="type">
+            <p data-v-7781fbdd="" class="title">类型:</p>
+            <ul data-v-7781fbdd="" class="type-list">
+              <div data-v-7781fbdd="" class="type-item active">
+                <div data-v-7781fbdd="" class="selector"></div>
+                <p data-v-7781fbdd="" class="text">月嫂</p>
+              </div>
+              <div data-v-7781fbdd="" class="type-item">
+                <div data-v-7781fbdd="" class="selector"></div>
+                <p data-v-7781fbdd="" class="text">育儿嫂</p>
+              </div>
+              <div data-v-7781fbdd="" class="type-item">
+                <div data-v-7781fbdd="" class="selector"></div>
+                <p data-v-7781fbdd="" class="text">保姆</p>
+              </div>
+              <div data-v-7781fbdd="" class="type-item">
+                <div data-v-7781fbdd="" class="selector"></div>
+                <p data-v-7781fbdd="" class="text">家政保洁</p>
+              </div>
+            </ul>
+          </div>
+          <section
+            data-v-479ac23e=""
+            data-v-7781fbdd=""
+            class="submit price-submit"
+          >
+            <div data-v-479ac23e="" class="item phone">
+              <p data-v-479ac23e="" class="item-title">手机号码:</p>
+              <div data-v-479ac23e="" class="input-item">
+                <input
+                  data-v-479ac23e=""
+                  type="text"
+                  placeholder="请填写您的手机号码"
+                  class="phone-inputer"
+                />
+              </div>
+            </div>
+            <!---->
+            <div data-v-479ac23e="" class="item date">
+              <p data-v-479ac23e="" class="item-title">预产期:</p>
+              <div
+                data-v-13fee07d=""
+                data-v-479ac23e=""
+                class="date-picker date-picker"
+              >
+                <div data-v-13fee07d="" class="trigger">
+                  <div data-v-479ac23e="" data-v-13fee07d="" class="input-item">
+                    <p data-v-479ac23e="" data-v-13fee07d="" class="text tip">
+                      请选择预产期
+                    </p>
+                    <div
+                      data-v-479ac23e=""
+                      data-v-13fee07d=""
+                      class="arrow"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-v-479ac23e="" class="item area">
+              <p data-v-479ac23e="" class="item-title">所在地区:</p>
+            </div>
+            <div data-v-479ac23e="" class="submit-button">获取报价</div>
+            <div data-v-37edc2c6="" data-v-479ac23e="" class="sign-agreements">
+              <div data-v-37edc2c6="" class="sign-agreements-checkbox">
+                <div
+                  data-v-37edc2c6=""
+                  role="checkbox"
+                  tabindex="0"
+                  aria-checked="false"
+                  class="van-checkbox"
+                >
+                  <div
+                    class="van-checkbox__icon van-checkbox__icon--round"
+                    style="font-size: 28px"
+                  >
+                    <i class="van-icon van-icon-success"><!----></i>
+                  </div>
+                </div>
+              </div>
+              <p data-v-37edc2c6="">
+                点击同意提交，即代表您已知悉并同意由妈妈网收集以上信息并提供给【第三方服务提供商】以提供咨询服务，妈妈网将为您推荐至多3个合适的商家，请留意商家的联系电话
+                <span data-v-37edc2c6="" style="color: rgb(254, 79, 2)"
+                  >《个人信息授权声明》</span
+                >
+              </p>
+            </div>
+            <div
+              data-v-67d6940a=""
+              data-v-479ac23e=""
+              class="doppler-tip-popup"
+            ></div>
+          </section>
+        </section>
+      </section>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://fastly.jsdelivr.net/npm/vant@3/lib/vant.min.js"></script>
+
+    <script src="./static/index.js"></script>
+  </body>
+</html>
