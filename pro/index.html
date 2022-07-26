@@ -46,84 +46,51 @@
           </p>
         </div>
         <section class="container yuesao-submit">
-          <div class="type">
+          <div class="type item">
             <p class="title">类型:</p>
             <van-checkbox-group v-model="checked" direction="horizontal">
               <van-checkbox
+                icon-size="30px"
                 checked-color="#ee0a24"
                 v-for="item in checkbox.checkboxes"
                 >{{item}}</van-checkbox
               >
             </van-checkbox-group>
           </div>
-          <section class="submit price-submit">
-            <div data-v-479ac23e="" class="item phone">
-              <p data-v-479ac23e="" class="item-title">手机号码:</p>
-              <div data-v-479ac23e="" class="input-item">
-                <input
-                  data-v-479ac23e=""
-                  type="text"
-                  placeholder="请填写您的手机号码"
-                  class="phone-inputer"
-                />
-              </div>
+          <div class="item phone">
+            <p class="item-title">手机号码:</p>
+            <div class="input-item">
+              <input
+                type="text"
+                placeholder="请填写您的手机号码"
+                class="phone-inputer"
+              />
             </div>
-            <!---->
-            <div data-v-479ac23e="" class="item date">
-              <p data-v-479ac23e="" class="item-title">预产期:</p>
-              <div
-                data-v-13fee07d=""
-                data-v-479ac23e=""
-                class="date-picker date-picker"
+          </div>
+          <div class="item date">
+            <p class="item-title">预产期:</p>
+            <div data-v-13fee07d="" class="input-item">
+              <p data-v-13fee07d="" class="text tip">请选择预产期</p>
+              <div data-v-13fee07d="" class="arrow"></div>
+            </div>
+          </div>
+          <div class="item area">
+            <p class="item-title">所在地区:</p>
+            <div data-v-13fee07d="" class="input-item">
+              <p data-v-13fee07d="" class="text tip">请选择地区</p>
+              <div data-v-13fee07d="" class="arrow"></div>
+            </div>
+          </div>
+          <div class="submit-button">获取报价</div>
+          <div data-v-37edc2c6="" class="sign-agreements">
+            <p data-v-37edc2c6="">
+              点击同意提交，即代表您已知悉并同意由妈妈网收集以上信息并提供给【第三方服务提供商】以提供咨询服务，妈妈网将为您推荐至多3个合适的商家，请留意商家的联系电话
+              <span data-v-37edc2c6="" style="color: rgb(254, 79, 2)"
+                >《个人信息授权声明》</span
               >
-                <div data-v-13fee07d="" class="trigger">
-                  <div data-v-479ac23e="" data-v-13fee07d="" class="input-item">
-                    <p data-v-479ac23e="" data-v-13fee07d="" class="text tip">
-                      请选择预产期
-                    </p>
-                    <div
-                      data-v-479ac23e=""
-                      data-v-13fee07d=""
-                      class="arrow"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-v-479ac23e="" class="item area">
-              <p data-v-479ac23e="" class="item-title">所在地区:</p>
-            </div>
-            <div data-v-479ac23e="" class="submit-button">获取报价</div>
-            <div data-v-37edc2c6="" data-v-479ac23e="" class="sign-agreements">
-              <div data-v-37edc2c6="" class="sign-agreements-checkbox">
-                <div
-                  data-v-37edc2c6=""
-                  role="checkbox"
-                  tabindex="0"
-                  aria-checked="false"
-                  class="van-checkbox"
-                >
-                  <div
-                    class="van-checkbox__icon van-checkbox__icon--round"
-                    style="font-size: 28px"
-                  >
-                    <i class="van-icon van-icon-success"><!----></i>
-                  </div>
-                </div>
-              </div>
-              <p data-v-37edc2c6="">
-                点击同意提交，即代表您已知悉并同意由妈妈网收集以上信息并提供给【第三方服务提供商】以提供咨询服务，妈妈网将为您推荐至多3个合适的商家，请留意商家的联系电话
-                <span data-v-37edc2c6="" style="color: rgb(254, 79, 2)"
-                  >《个人信息授权声明》</span
-                >
-              </p>
-            </div>
-            <div
-              data-v-67d6940a=""
-              data-v-479ac23e=""
-              class="doppler-tip-popup"
-            ></div>
-          </section>
+            </p>
+          </div>
+          <div class="doppler-tip-popup"></div>
         </section>
       </section>
     </div>
