@@ -10,24 +10,31 @@ const usePrice = () => {
   return price;
 };
 // 位置
-function getLocation() {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const coords = pos.coords || {};
-        const { latitude, longitude } = coords;
-        const position = wgs84ToGCJ02(longitude, latitude);
-        resolve(position);
-      },
-      (e) => {
-        reject(e);
-      },
-      {
-        timeout: 100000,
-      }
-    );
+const useLocation = () => {
+  function getLocation() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const coords = pos.coords || {};
+          const { latitude, longitude } = coords;
+          const position = wgs84ToGCJ02(longitude, latitude);
+          resolve(position);
+        },
+        (e) => {
+          reject(e);
+        },
+        {
+          timeout: 100000,
+        }
+      );
+    });
+  }
+  Vue.onMounted(() => {
+    getLocation()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   });
-}
+};
 // 复选
 const useCheckbox = () => {
   const checkboxes = ['月嫂', '育儿嫂', '保姆', '家政保洁'];
@@ -89,32 +96,47 @@ const usePicker = () => {
     },
   };
 };
+const useBtn = () => {
+  const showBottomBtn = Vue.ref(false);
+  const checkTop = () => {
+    const scrollTop =
+      document.documentElement.scrollTop ||
+      window.pageYOffset ||
+      document.body.scrollTop;
+    console.log(scrollTop);
+    if (scrollTop > 1200) {
+      showBottomBtn.value = true;
+    } else {
+      showBottomBtn.value = false;
+    }
+  };
+  Vue.onMounted(() => {
+    checkTop();
+    window.addEventListener('scroll', checkTop);
+  });
+  return showBottomBtn;
+};
 // 全局
 const app = Vue.createApp({
   setup() {
-    Vue.onMounted(() => {
-      getLocation()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    });
-    const price = usePrice();
-    const checkbox = useCheckbox();
-    const data = useInfo();
     const form = useForm();
 
     const submit = () => {
       console.log(form.value);
+      axios.post('/url', form.value).then(() => {});
+      vant.Dialog({ message: '提交成功' });
     };
-    const picker = usePicker();
+
     return {
       userJson,
-      price,
-      checkbox,
-      data,
-      ...picker,
+      cityJson,
+      price: usePrice(),
+      checkbox: useCheckbox(),
+      data: useInfo(),
+      ...usePicker(),
+      showBottomBtn: useBtn(),
       submit,
       form,
-      cityJson,
     };
   },
 });

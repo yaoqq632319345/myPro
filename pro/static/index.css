@@ -11,6 +11,7 @@
   --van-line-height-md: 44px !important;
   --van-font-size-xs: 28px !important;
   --van-line-height-xs: 38px !important;
+  --van-dialog-button-height: 96px !important;
 }
 .van-picker__toolbar {
   height: 80px !important;
@@ -286,4 +287,26 @@ input {
 .city-wrap {
   height: 100%;
   overflow: auto;
+  padding: 20px 0;
+}
+.van-index-bar {
+  position: static;
+}
+.van-index-anchor {
+  margin: 20px 0;
+}
+.city-wrap .van-index-bar__sidebar {
+  position: absolute;
+}
+.citys {
+  padding: 10px 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.citys span {
+  border: 1px solid #198471;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 8px;
+  white-space: nowrap;
 }

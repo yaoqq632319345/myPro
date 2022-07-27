@@ -70,18 +70,14 @@
               <p class="text tip">请选择预产期</p>
               <div class="arrow"></div>
             </div>
-            <van-popup
-              v-model:show="dateShow"
-              position="bottom"
-              round
-              :style="{ height: '30%' }"
-            >
+            <van-popup v-model:show="dateShow" position="bottom" round>
               <van-datetime-picker
                 item-height="80px"
                 v-model="form.date"
                 type="date"
                 title="选择年月日"
-            /></van-popup>
+              />
+            </van-popup>
           </div>
           <div class="item area">
             <p class="item-title">所在地区:</p>
@@ -96,11 +92,15 @@
               :style="{ height: '80%' }"
             >
               <div class="city-wrap">
-                <van-index-bar>
-                  <template v-for="item in cityJson">
-                    <van-index-anchor :index="item.letter" />
-                    <span v-for="city in item.list" v-text="city"></span>
-                  </template>
+                <van-index-bar :sticky="false">
+                  <div style="margin: 40px 0" v-for="(item, index) in cityJson">
+                    <van-index-anchor :index="item.letter"
+                      >{{item.letter}}</van-index-anchor
+                    >
+                    <div class="citys">
+                      <span v-for="city in item.list" v-text="city"></span>
+                    </div>
+                  </div>
                 </van-index-bar>
               </div>
             </van-popup>
@@ -153,7 +153,7 @@
         <div class="map-title"></div>
         <img src="./static/banner.webp" alt="" />
       </section>
-      <footer class="footer footer">
+      <footer class="footer footer" v-show="showBottomBtn">
         <div class="footer-button" @click="submit">获取报价</div>
       </footer>
     </div>
