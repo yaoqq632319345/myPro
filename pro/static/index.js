@@ -79,20 +79,23 @@ const useForm = () => {
     phone: '',
     date: '',
   });
+
   return form;
 };
 // 时间
 const usePicker = () => {
   const dateShow = Vue.ref(false);
   const cityShow = Vue.ref(false);
+  const date = Vue.ref();
   return {
+    date,
     dateShow,
     cityShow,
     dateShowPicker() {
       dateShow.value = !dateShow.value;
     },
     cityShowPicker() {
-      cityShow.value = !dateShow.value;
+      cityShow.value = !cityShow.value;
     },
   };
 };
@@ -127,18 +130,41 @@ const app = Vue.createApp({
       vant.Dialog({ message: '提交成功' });
     };
 
+    const picker = usePicker();
+    const selectCity = (value) => {
+      form.value.city = value;
+      picker.cityShowPicker();
+    };
+    Vue.watch(picker.date, (val) => {
+      console.log(val);
+      form.value.date = formatDate(val);
+    });
     return {
+      selectCity,
       userJson,
       cityJson,
       price: usePrice(),
       checkbox: useCheckbox(),
       data: useInfo(),
-      ...usePicker(),
+      ...picker,
       showBottomBtn: useBtn(),
       submit,
       form,
     };
   },
 });
+/**
+ * 格式化日期
+ * @param {Date} val
+ */
+function formatDate(val) {
+  if (!val) return;
+  var y = val.getFullYear();
+  var m = val.getMonth() + 1;
+  m = m < 10 ? '0' + m : m;
+  var d = val.getDate();
+  d = d < 10 ? '0' + d : d;
+  return y + '-' + m + '-' + d;
+}
 app.use(vant);
 app.mount('#app');

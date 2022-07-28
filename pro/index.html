@@ -67,14 +67,18 @@
           <div class="item date">
             <p class="item-title">预产期:</p>
             <div class="input-item" @click="dateShowPicker">
-              <p class="text tip">请选择预产期</p>
+              <p class="text" :class="form.date? '' : 'tip'">
+                {{form.date? form.date:'请选择预产期'}}
+              </p>
               <div class="arrow"></div>
             </div>
             <van-popup v-model:show="dateShow" position="bottom" round>
               <van-datetime-picker
                 item-height="80px"
-                v-model="form.date"
+                v-model="date"
                 type="date"
+                @confirm="dateShowPicker"
+                @cancel="dateShowPicker"
                 title="选择年月日"
               />
             </van-popup>
@@ -82,7 +86,9 @@
           <div class="item area">
             <p class="item-title">所在地区:</p>
             <div class="input-item" @click="cityShowPicker">
-              <p class="text tip">请选择地区</p>
+              <p class="text" :class="form.city ? '' : 'tip'">
+                {{form.city ? form.city :'请选择地区'}}
+              </p>
               <div class="arrow"></div>
             </div>
             <van-popup
@@ -98,7 +104,11 @@
                       >{{item.letter}}</van-index-anchor
                     >
                     <div class="citys">
-                      <span v-for="city in item.list" v-text="city"></span>
+                      <span
+                        v-for="city in item.list"
+                        @click="selectCity(city)"
+                        v-text="city"
+                      ></span>
                     </div>
                   </div>
                 </van-index-bar>
