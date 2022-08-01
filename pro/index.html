@@ -7,11 +7,8 @@
     />
     <meta name="format-detection" content="telephone=no" />
     <title>月嫂</title>
+    <link rel="stylesheet" href="./static/lib/vant.css" />
     <link rel="stylesheet" href="./static/index.css" />
-    <link
-      rel="stylesheet"
-      href="https://fastly.jsdelivr.net/npm/vant@3/lib/index.css"
-    />
   </head>
   <body>
     <div id="app">
@@ -167,11 +164,15 @@
         <div class="footer-button" @click="submit">获取报价</div>
       </footer>
     </div>
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      var process = {
+        env: { NODE_ENV: 'production' },
+      };
+    </script>
+    <script src="./static/lib/axios.js"></script>
     <script src="./static/data.js"></script>
-    <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.js"></script>
-    <script src="https://fastly.jsdelivr.net/npm/vant@3/lib/vant.min.js"></script>
+    <script src="./static/lib//vue.js"></script>
+    <script src="./static/lib/vant.js"></script>
 
     <script src="./static/index.js"></script>
   </body>
