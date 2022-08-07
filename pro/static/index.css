@@ -372,3 +372,10 @@ input {
   margin-top: 20px;
   border: 1px solid #f33f3e;
 }
+.van-dialog {
+  width: 70%;
+}
+.van-dialog__message img {
+  width: 100%;
+  margin-top: 30px;
+}

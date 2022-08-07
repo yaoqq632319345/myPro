@@ -151,8 +151,11 @@ const app = Vue.createApp({
         return;
       }
       console.log(form.value);
-      axios.post('/url', form.value).then(() => {});
-      vant.Dialog({ message: '提交成功' });
+      axios.get('/url', { params: form.value }).then(() => {});
+      vant.Dialog({
+        message: '提交成功<img src="./static/img/1-1.webp">',
+        allowHtml: true,
+      });
     };
 
     const picker = usePicker();
