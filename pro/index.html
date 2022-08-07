@@ -38,7 +38,7 @@
           </p>
         </div>
         <section class="container yuesao-submit">
-          <div class="type item">
+          <!-- <div class="type item">
             <p class="title">类型:</p>
             <van-checkbox-group v-model="form.checked" direction="horizontal">
               <van-checkbox
@@ -49,7 +49,7 @@
                 >{{item}}</van-checkbox
               >
             </van-checkbox-group>
-          </div>
+          </div> -->
           <div class="item phone">
             <p class="item-title">手机号码:</p>
             <div class="input-item">
@@ -61,7 +61,7 @@
               />
             </div>
           </div>
-          <div class="item date">
+          <!-- <div class="item date">
             <p class="item-title">预产期:</p>
             <div class="input-item" @click="dateShowPicker">
               <p class="text" :class="form.date? '' : 'tip'">
@@ -79,7 +79,7 @@
                 title="选择年月日"
               />
             </van-popup>
-          </div>
+          </div> -->
           <div class="item area">
             <p class="item-title">所在地区:</p>
             <div class="input-item" @click="cityShowPicker">
@@ -113,14 +113,14 @@
             </van-popup>
           </div>
           <div class="submit-button" @click="submit">获取报价</div>
-          <div class="sign-agreements">
+          <!-- <div class="sign-agreements">
             <p data-v-37edc2c6="">
               点击同意提交，即代表您已知悉并同意由妈妈网收集以上信息并提供给【第三方服务提供商】以提供咨询服务，妈妈网将为您推荐至多3个合适的商家，请留意商家的联系电话
               <span data-v-37edc2c6="" style="color: rgb(254, 79, 2)"
                 >《个人信息授权声明》</span
               >
             </p>
-          </div>
+          </div> -->
           <div class="doppler-tip-popup"></div>
         </section>
       </section>
@@ -158,7 +158,31 @@
       </section>
       <section class="map section map">
         <div class="map-title"></div>
-        <img src="./static/banner.webp" alt="" />
+        <!-- <img src="./static/banner.webp" alt="" > -->
+        <ul class="baomu-list">
+          <li class="list-1-item" v-for="item in data2">
+            <div class="left">
+              <div
+                class="avator"
+                :style="`background-image: url(${item.img})`"
+              ></div>
+            </div>
+            <div class="right">
+              <p class="right-info1">
+                <span class="name">{{item.name}}</span>
+                <span class="jingp" v-if="item.jingp">精品</span>
+              </p>
+              <p class="right-info3">
+                <span>{{item.age}}</span> <i class="line"></i>
+                <span>{{item.year}}</span>
+              </p>
+              <p class="right-info2">
+                <span class="details" v-for="i in item.techange">{{i}}</span>
+              </p>
+            </div>
+            <div class="btn" @click="submit">咨询价格</div>
+          </li>
+        </ul>
       </section>
       <footer class="footer footer" v-show="showBottomBtn">
         <div class="footer-button" @click="submit">获取报价</div>

@@ -44,6 +44,24 @@ const useCheckbox = () => {
 };
 // 轮播;
 const useInfo = () => {
+  const data2 = [
+    {
+      name: '郭阿姨',
+      img: './static/yuesao/1.jpg',
+      jingp: true,
+      age: '38岁',
+      year: '从业4年',
+      techange: ['洗衣服', '打扫卫生'],
+    },
+    {
+      name: '李阿姨',
+      jingp: true,
+      img: './static/yuesao/1.jpg',
+      age: '38岁',
+      year: '从业4年',
+      techange: ['洗衣服', '打扫卫生'],
+    },
+  ];
   const data = [
     {
       name: '豆小包妈咪',
@@ -71,7 +89,10 @@ const useInfo = () => {
       p: ' 我是二胎妈妈，第一胎的时候，年纪轻没请月嫂，真心觉得累，因为没人指导，所以养娃之路上走了不少弯路。这次二胎，果断找了月嫂，真心觉得月嫂很有必要。照顾我的是戴阿姨，不仅饭烧的好吃，照顾起宝宝也是经验十足。月子里面我的胃口相当好，这要归功于戴阿姨，关键是我每天吃这么多，也没怎么长胖，奶水充足的，每天戴阿姨会陪着我和宝宝出门逛30分钟，让我坚持运动。基本在这两个月里，我没怎么操心，休息的很充分，身体也比一胎的时候好很多~',
     },
   ];
-  return data;
+  return {
+    data,
+    data2,
+  };
 };
 const useForm = () => {
   const form = Vue.ref({
@@ -125,6 +146,10 @@ const app = Vue.createApp({
     const form = useForm();
 
     const submit = () => {
+      if (!/^1\d{10}$/.test(form.value.phone)) {
+        vant.Dialog({ message: '手机号不正确' });
+        return;
+      }
       console.log(form.value);
       axios.post('/url', form.value).then(() => {});
       vant.Dialog({ message: '提交成功' });
@@ -145,7 +170,7 @@ const app = Vue.createApp({
       cityJson,
       price: usePrice(),
       checkbox: useCheckbox(),
-      data: useInfo(),
+      ...useInfo(),
       ...picker,
       showBottomBtn: useBtn(),
       submit,
