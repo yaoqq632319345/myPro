@@ -147,7 +147,9 @@ const app = Vue.createApp({
 
     const submit = () => {
       if (!/^1\d{10}$/.test(form.value.phone)) {
-        vant.Dialog({ message: '手机号不正确' });
+        vant.Dialog({ message: '手机号不正确' }).then(() => {
+          document.querySelector('.phone-inputer').focus();
+        });
         return;
       }
       console.log(form.value);
