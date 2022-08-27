@@ -1,0 +1,33 @@
+.page {
+  padding: 38.52vw 0 81.67vw;
+  background-image: url('../../img/90392915624b5a9ab9eb0c9bc58cd4fc.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+.image {
+  width: 36.3vw;
+  height: 36.3vw;
+}
+.text {
+  text-transform: uppercase;
+}
+.text_1 {
+  margin-top: 4.81vw;
+  color: #3e3a39;
+  font-size: 6.85vw;
+  font-family: SourceHanSansCN;
+  font-weight: 700;
+  line-height: 6.67vw;
+}
+.text_2 {
+  margin-top: 4.08vw;
+  color: #3e3a39;
+  font-size: 6.02vw;
+  font-family: SourceHanSansCN;
+  font-weight: 500;
+  line-height: 5.74vw;
+}

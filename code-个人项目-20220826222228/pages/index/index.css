@@ -1,0 +1,342 @@
+.page {
+  background-image: url('../../img/9507d4a66c17bef2ce8fce2cd052d117.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+.section_1 {
+  padding: 85.06vw 10.19vw 9.07vw 10.74vw;
+  background-image: url('../../img/ae6df651e00ced4a82077f4982057aac.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.image {
+  width: 3.43vw;
+  height: 3.33vw;
+}
+.group_1 {
+  margin-left: 0.74vw;
+  line-height: 3.33vw;
+  height: 3.33vw;
+}
+.text {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.text_1 {
+  color: #565454;
+  font-size: 3.61vw;
+  font-family: SourceHanSansCN;
+  font-weight: 500;
+  line-height: 3.33vw;
+  letter-spacing: 0.29vw;
+}
+.text_2 {
+  color: #eb5b88;
+  font-size: 3.61vw;
+  font-family: SourceHanSansCN;
+  font-weight: 500;
+  line-height: 1.48vw;
+  letter-spacing: 0.29vw;
+}
+.group_2 {
+  margin-top: 4vw;
+  padding: 0 0.28vw;
+}
+.image_1 {
+  width: 3.33vw;
+  height: 3.8vw;
+}
+.group_3 {
+  margin-left: 0.93vw;
+  margin-top: 0.46vw;
+  line-height: 3.43vw;
+  height: 3.43vw;
+}
+.text_3 {
+  color: #565454;
+  font-size: 3.61vw;
+  font-family: SourceHanSansCN;
+  font-weight: 500;
+  line-height: 3.43vw;
+  letter-spacing: 0.29vw;
+}
+.text_4 {
+  color: #eb5b88;
+  font-size: 3.61vw;
+  font-family: SourceHanSansCN;
+  font-weight: 500;
+  line-height: 1.48vw;
+  letter-spacing: 0.29vw;
+}
+.button {
+  width: 79.07vw;
+  height: 8.33vw;
+}
+.image_2 {
+  margin-top: 4vw;
+}
+.group_4 {
+  padding: 6.85vw 0 4.91vw;
+}
+.section_2 {
+  padding: 17.96vw 8.98vw 10.74vw 10.46vw;
+  background-image: url('../../img/04da7f70f894ab5fbf91b724ec7f9714.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.group_5 {
+  align-self: flex-end;
+  width: 42.37vw;
+}
+.group_6 {
+  align-self: flex-end;
+}
+.text_5 {
+  color: #3e3a39;
+  font-size: 4.44vw;
+  font-family: DFPYuanW9;
+  line-height: 5.74vw;
+}
+.text_6 {
+  color: #3e3a39;
+  font-size: 4.44vw;
+  font-family: DFPYuanW9;
+  line-height: 5.74vw;
+}
+.group_7 {
+  margin-top: 2.78vw;
+}
+.image_3 {
+  margin-top: 1.5vw;
+  flex-shrink: 0;
+  width: 2.87vw;
+  height: 28.7vw;
+}
+.group_8 {
+  margin-left: 1.11vw;
+  flex: 1 1 auto;
+  line-height: 3.33vw;
+  height: 33.7vw;
+}
+.text_7 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW9;
+  line-height: 3.33vw;
+}
+.text_8 {
+  color: #3e3a39;
+  font-size: 10px;
+  font-family: DFPYuanW7;
+  line-height: 5.37vw;
+}
+.text_9 {
+  color: #3e3a39;
+  font-size: 10px;
+  font-family: DFPYuanW9;
+  line-height: 2.33vw;
+}
+.text_10 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW7;
+  line-height: 5.37vw;
+}
+.text_11 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW9;
+  line-height: 3.33vw;
+}
+.text_12 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW7;
+  line-height: 5.37vw;
+}
+.text_13 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW9;
+  line-height: 3.33vw;
+}
+.text_14 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW7;
+  line-height: 5.37vw;
+}
+.group_9 {
+  margin-top: 10.56vw;
+  align-self: flex-start;
+  width: 32.96vw;
+}
+.group_10 {
+  align-self: center;
+}
+.text_15 {
+  color: #3e3a39;
+  font-size: 4.44vw;
+  font-family: DFPYuanW9;
+  line-height: 5.74vw;
+}
+.text_16 {
+  color: #3e3a39;
+  font-size: 4.44vw;
+  font-family: DFPYuanW9;
+  line-height: 5.74vw;
+}
+.group_11 {
+  margin-top: 3.06vw;
+}
+.image_4 {
+  margin-top: 0.8vw;
+  flex-shrink: 0;
+  width: 2.41vw;
+  height: 11.48vw;
+}
+.group_12 {
+  margin-left: 1.85vw;
+  flex: 1 1 auto;
+  line-height: 3.33vw;
+  height: 16.39vw;
+}
+.text_17 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW9;
+  line-height: 3.33vw;
+}
+.text_18 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW7;
+  line-height: 5.37vw;
+}
+.text_19 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW9;
+  line-height: 3.33vw;
+}
+.text_20 {
+  color: #3e3a39;
+  font-size: 2.59vw;
+  font-family: DFPYuanW7;
+  line-height: 5.37vw;
+}
+.image_5 {
+  margin: 14.44vw 3.15vw 0 3.24vw;
+  width: 74.17vw;
+  height: 38.33vw;
+}
+.group_13 {
+  padding: 4.72vw 0 75.74vw;
+  position: relative;
+}
+.section_3 {
+  margin-left: 2.5vw;
+  margin-right: 2.22vw;
+  padding: 15vw 5.93vw 8.98vw;
+  background-image: url('../../img/9b8a345bea3ee0fd9a15fc3ab07786cc.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.group_14 {
+  margin-left: 0.37vw;
+  align-self: flex-start;
+  width: 43.8vw;
+}
+.image_6 {
+  flex-shrink: 0;
+  width: 8.43vw;
+  height: 8.43vw;
+}
+.group_15 {
+  margin: 0.56vw 0 0.28vw 2.13vw;
+  flex: 1 1 auto;
+  line-height: 3.7vw;
+  height: 7.59vw;
+}
+.text_21 {
+  color: #eb5b88;
+  font-size: 2.78vw;
+  white-space: nowrap;
+  font-family: SourceHanSansCN;
+  line-height: 3.7vw;
+  letter-spacing: 0.17vw;
+}
+.text_22 {
+  color: #4d4d4d;
+  font-size: 2.78vw;
+  font-family: SourceHanSansCN;
+  line-height: 3.7vw;
+  letter-spacing: 0.17vw;
+}
+.image_7 {
+  margin-left: 1.48vw;
+  margin-top: 1.39vw;
+  flex-shrink: 0;
+  width: 5.09vw;
+  height: 2.04vw;
+}
+.group_16 {
+  margin: 2.22vw 1.67vw 0 0.83vw;
+  padding: 1.02vw 0 24.17vw;
+  position: relative;
+}
+.image_8 {
+  margin-left: 6.57vw;
+  width: 11.11vw;
+  height: 2.5vw;
+}
+.group_17 {
+  line-height: 4.63vw;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+.text_23 {
+  color: #595757;
+  font-size: 2.78vw;
+  font-family: Adobe Heiti Std;
+  line-height: 4.63vw;
+  letter-spacing: 0.17vw;
+}
+.text_24 {
+  color: #595757;
+  font-size: 10px;
+  font-family: Adobe Heiti Std;
+  line-height: 4.63vw;
+  letter-spacing: 0.17vw;
+}
+.equal-division {
+  margin-right: 2.13vw;
+  margin-top: 3.52vw;
+}
+.equal-division-item {
+  margin-left: 0.51vw;
+  flex: 1 1 26.81vw;
+  width: 26.76vw;
+  height: 17.87vw;
+}
+.image_9 {
+  margin-left: 0;
+}
+.image-wrapper {
+  padding: 135vw 0 11.39vw;
+  background-image: url('../../img/a428410a0cfa60812b6b5fc257b15a66.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 2.5vw;
+  right: 2.22vw;
+  top: 50%;
+  transform: translateY(-50%);
+}

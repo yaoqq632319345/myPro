@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>月嫂</title>
+    <link rel="stylesheet" href="../../index.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="../../lib/animate.css" />
+    <link rel="stylesheet" href="./self.css" />
+  </head>
+  <body>
+    <div class="flex-col page" id="app">
+      <div class="flex-col section_1">
+        <div class="price">
+          <span class="num" v-text="price"></span>
+          <span class="icon">元</span>
+        </div>
+        <var-swipe class="my-swipe" :autoplay="3000" vertical>
+          <var-swipe-item v-for="(item, index) in userJson"
+            >{{item}}</var-swipe-item
+          >
+        </var-swipe>
+        <div class="flex-row">
+          <img
+            src="../../img/23308d5f356afee9295640c142c38fe1.png"
+            class="image"
+          />
+          <div class="group_1">
+            <span class="text text_1">城市</span>
+            <span class="text text_2">*</span>
+          </div>
+        </div>
+        <div
+          class="citySelect"
+          :class="form.city ? '' : 'noData'"
+          @click="cityShow = true"
+        >
+          {{form.city ? form.city:'请选择城市'}}<span>></span>
+        </div>
+        <div class="flex-row group_2">
+          <img
+            src="../../img/797a383c4760273604be724587aa7311.png"
+            class="image_1"
+          />
+          <div class="group_3">
+            <span class="text text_3">请输入手机号码</span>
+            <span class="text text_4">*</span>
+          </div>
+        </div>
+        <div class="citySelect">
+          <input
+            type="text"
+            class="phone-inputer1"
+            v-model="form.phone"
+            placeholder="请输入手机号码"
+          /><span>></span>
+        </div>
+        <img
+          src="../../img/20a843377a9716ae9606b753098635f3.png"
+          class="button image_2 animate__heartBeat animate__slower animate__infinite animate__animated"
+          @click="submit(1)"
+        />
+      </div>
+      <div class="flex-col group_4">
+        <div class="flex-col section_2">
+          <div class="flex-col group_5">
+            <div class="group_6">
+              <span class="text text_5">细心呵护新生儿</span>
+              <span class="text text_6">让宝宝更健康</span>
+            </div>
+            <div class="flex-row group_7">
+              <img
+                src="../../img/3d904a86bdc5833be29c0fd283510444.png"
+                class="image_3"
+              />
+              <div class="group_8">
+                <span class="text text_7">生活护理</span><br />
+                <span class="text text_8">喂养、穿衣、换尿布等护理</span><br />
+                <span class="text text_9">预防疾病</span><br />
+                <span class="text text_10">预防黄疸、尿布疹等疾病</span><br />
+                <span class="text text_11">专业护理</span><br />
+                <span class="text text_12">做抚触、按摩、脐带护理等</span><br />
+                <span class="text text_13">潜能开发</span><br />
+                <span class="text text_14">婴儿被动操，早期智力开发</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-col group_9">
+            <div class="group_10">
+              <span class="text text_15">全天照料产妇</span>
+              <span class="text text_16">让您更放心</span>
+            </div>
+            <div class="flex-row group_11">
+              <img
+                src="../../img/fcbbc5ce5c58fa1a939010f80f39d375.png"
+                class="image_4"
+              />
+              <div class="group_12">
+                <span class="text text_17">产后护理</span>
+                <span class="text text_18">产后观察护理，清洗衣物</span>
+                <span class="text text_19">健康指导</span>
+                <span class="text text_20">搭配膳食，协助产妇恢复</span>
+              </div>
+            </div>
+          </div>
+          <img
+            src="../../img/7707ee62bd023d7503c36631bbb7223a.png"
+            class="image_5"
+          />
+        </div>
+        <div class="flex-col group_13">
+          <div class="flex-col section_3">
+            <var-swipe :autoplay="3000">
+              <var-swipe-item
+                :class="item.tag ? 'hastag' : ''"
+                v-for="item in swiper"
+              >
+                <div class="flex-row group_14">
+                  <img :src="item.head" class="image_6" />
+                  <div class="group_15">
+                    <span class="text_21">{{item.name}}</span><br />
+                    <span class="text_22">{{item.date}}</span>
+                  </div>
+                  <img :src="`../../img/lv${item.lv}.png`" class="image_7" />
+                </div>
+                <div class="flex-col items-start group_16">
+                  <div class="image_8 star-wrap">
+                    <img
+                      src="../../img/start.png"
+                      v-for="star in item.star"
+                      alt=""
+                    />
+                  </div>
+                  <div class="group_17">
+                    <span class="text_23">打分</span><br />
+                    <span class="text_24">{{item.content}}</span>
+                  </div>
+                </div>
+                <div class="flex-row equal-division">
+                  <img
+                    v-for="(img, index) in item.imgs"
+                    :src="img"
+                    class="equal-division-item"
+                    :class="index === 0? 'image_9':''"
+                  />
+                </div>
+              </var-swipe-item>
+            </var-swipe>
+          </div>
+
+          <div class="flex-col items-center image-wrapper">
+            <div
+              class="citySelect"
+              :class="form.city ? '' : 'noData'"
+              @click="cityShow = true"
+            >
+              {{form.city ? form.city:'请选择城市'}}<span>></span>
+            </div>
+            <div class="citySelect">
+              <input
+                type="text"
+                v-model="form.phone"
+                placeholder="请输入手机号码"
+                class="phone-inputer2"
+              /><span>></span>
+            </div>
+            <img
+              src="../../img/8dfdf4ad7da25be5887bd0fc47bf1f05.png"
+              class="button animate__heartBeat animate__slower animate__infinite animate__animated"
+              @click="submit(2)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 城市 -->
+      <div class="city-wrap" v-if="cityShow">
+        <h1>
+          选择城市
+          <var-icon
+            @click="cityShow = false"
+            class="close"
+            name="close-circle-outline"
+          />
+        </h1>
+
+        <h3>热门城市</h3>
+        <div class="hotcity">
+          <span v-for="item in hotcity" @click="selectCity(item)"
+            >{{item}}</span
+          >
+        </div>
+        <h3>服务开通城市</h3>
+
+        <var-index-bar duration="300">
+          <div v-for="item in cityJson" :key="item.letter">
+            <var-index-anchor
+              :index="item.letter"
+              class="var-index-anchor__example"
+            >
+              {{ item.letter }}
+            </var-index-anchor>
+            <var-cell v-for="city in item.list" @click="selectCity(city)"
+              >{{ city }}</var-cell
+            >
+          </div>
+        </var-index-bar>
+      </div>
+    </div>
+
+    <script src="../../lib/vue.js"></script>
+
+    <script src="../../lib/area.js"></script>
+    <script src="../../lib/data.js"></script>
+    <script src="../../lib/verlet.js"></script>
+    <script src="../../lib/axios.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
