@@ -4,23 +4,24 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import puppeteer from 'puppeteer';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-async function sleep(time = 5000) {
-  console.log('休息时间.........');
-  return new Promise((res) => {
-    setTimeout(res, time);
-  });
-}
-
-const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间'];
+const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间', '地址'];
 const data = [sheetHead];
 // 浏览器
 const browers = await puppeteer.launch({ headless: false });
 const page = await browers.newPage();
 
+// 主程序
+(async function () {
+  const urls = await getUrls();
+  await getDataByUrls(urls);
+  createXlsx(data);
+  browers.close();
+})();
+
+// ======================== 方法
 // 获取地址
 async function getUrls() {
-  const data = nodeXlsx.parse(path.join(__dirname, '快手.xlsx'));
+  const data = nodeXlsx.parse(path.join(__dirname, 'url.xlsx'));
   let urls;
   data.forEach((sheet) => {
     const list = sheet.data;
@@ -37,28 +38,33 @@ async function getDataByUrls(urls) {
   console.log(`共${urls.length}条数据`);
   for await (const url of urls) {
     console.log(`正在处理${urls.indexOf(url)}/${urls.length}.......`);
-    const item = await getDataKkuz(url);
-    data.push(item);
+    if (url.includes('douyin')) {
+      console.log('抖音数据：', url);
+      const item = await getDataDzyb(url);
+      data.push(item);
+    } else if (url.includes('kuaishou')) {
+      console.log('抖音数据：', url);
+      const item = await getDataKkuz(url);
+      data.push(item);
+    } else {
+      console.log('啥也不是的地址：', url);
+    }
   }
 }
-(async function () {
-  const urls = await getUrls();
-  await getDataByUrls(urls);
-  createXlsx(data);
-  browers.close();
-})();
 
 // 创建xlsx
 function createXlsx(data) {
-  var buffer = nodeXlsx.build([{ name /* sheetName */: '抖音', data }]);
+  var buffer = nodeXlsx.build([{ name /* sheetName */: 'sheetName', data }]);
   const fileDir = path.join(__dirname, `../xlsx`);
-  const filePath = path.join(fileDir, `${new Date().getTime()}.xlsx`);
+  const time = new Date();
+  const name = `${time.getHours()}：${time.getMinutes()}`;
+  const filePath = path.join(fileDir, `${name}.xlsx`);
   if (!fs.existsSync(fileDir)) fs.mkdirSync(fileDir);
   fs.writeFileSync(filePath, buffer);
 }
 
 // 根据url获取单页数据 抖音
-async function getData(url) {
+async function getDataDzyb(url) {
   await page.goto(url);
   try {
     const body = await page.$('body');
@@ -72,16 +78,17 @@ async function getData(url) {
     const title = await videoInfo.$eval('.new-pmd', (node) => node.innerText);
     const date = await videoInfo.$eval('.aQoncqRg', (node) => node.innerText);
     await sleep();
-    return [name, fans, like, title, date];
+    return [name, fans, like, title, date, url];
   } catch (error) {
     console.error('有条数据报错了：', url, error.message);
     await sleep();
     return ['报错了：', url];
   }
 }
-
+// 快手
 async function getDataKkuz(url) {
   await page.goto(url);
+  await sleep();
   try {
     const body = await page.$('body');
     // 用户信息模块
@@ -101,9 +108,8 @@ async function getDataKkuz(url) {
       (node) => `发布时间${node.innerText.split('发布时间')[1]}`
     );
     await sleep();
-    console.log([name, fans, like, title, date]);
     if (name) {
-      return [name, fans, like, title, date];
+      return [name, fans, like, title, date, url];
     }
     return ['报错了：', url];
   } catch (error) {
@@ -111,4 +117,12 @@ async function getDataKkuz(url) {
     await sleep();
     return ['报错了：', url];
   }
+}
+
+// 等待
+async function sleep(time = 5000) {
+  console.log('休息时间.........');
+  return new Promise((res) => {
+    setTimeout(res, time);
+  });
 }
