@@ -3,6 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import puppeteer from 'puppeteer';
+const iPhone = puppeteer.devices['iPhone 6'];
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间', '地址'];
 const data = [sheetHead];
@@ -21,7 +23,7 @@ const page = await browers.newPage();
 // ======================== 方法
 // 获取地址
 async function getUrls() {
-  const data = nodeXlsx.parse(path.join(__dirname, 'url.xlsx'));
+  const data = nodeXlsx.parse(path.join(__dirname, '随便.xlsx'));
   let urls;
   data.forEach((sheet) => {
     const list = sheet.data;
@@ -88,7 +90,6 @@ async function getDataDzyb(url) {
 // 快手
 async function getDataKkuz(url) {
   await page.goto(url);
-  await sleep();
   try {
     const body = await page.$('body');
     // 用户信息模块
@@ -119,8 +120,49 @@ async function getDataKkuz(url) {
   }
 }
 
+// 小红书
+async function getDataXnhsuu(url) {
+  await page.emulate(iPhone);
+  await sleep();
+  await page.goto(url);
+  try {
+    const body = await page.$('body');
+    // 用户信息模块
+    const name = await body.$eval('.author-username', (node) => node.innerText);
+    const like = await body.$eval(
+      '.action-button .rf-n',
+      (node) => node.innerText
+    );
+    const fans = '小红书也没有关注数';
+    // 视频信息模块
+    const title = await body.$eval('.author-desc', (node) => node.innerText);
+    const date = '小红书没有发布时间';
+    await sleep();
+    console.log(nam, fans, like, title, date, url);
+    await page.setViewport({
+      width: 640,
+      height: 480,
+      deviceScaleFactor: 1,
+      isMobile: false,
+    });
+    if (name) {
+      return [name, fans, like, title, date, url];
+    }
+    return ['报错了：', url];
+  } catch (error) {
+    await page.setViewport({
+      width: 640,
+      height: 480,
+      deviceScaleFactor: 1,
+      isMobile: false,
+    });
+    console.error('有条数据报错了：', url, error.message);
+    await sleep();
+    return ['报错了：', url];
+  }
+}
 // 等待
-async function sleep(time = 5000) {
+async function sleep(time = 2000) {
   console.log('休息时间.........');
   return new Promise((res) => {
     setTimeout(res, time);
