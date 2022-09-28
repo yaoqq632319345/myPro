@@ -6,7 +6,7 @@ import puppeteer from 'puppeteer';
 const iPhone = puppeteer.devices['iPhone 6'];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间', '地址'];
+const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间', '地址', '播放量'];
 const data = [sheetHead];
 // 浏览器
 const browers = await puppeteer.launch({ headless: false });
@@ -41,15 +41,26 @@ async function getDataByUrls(urls) {
   for await (const url of urls) {
     console.log(`正在处理${urls.indexOf(url)}/${urls.length}.......`);
     if (url.includes('douyin')) {
-      console.log('抖音数据：', url);
-      const item = await getDataDzyb(url);
-      data.push(item);
+      await action(url, '抖音数据', getDataDzyb);
     } else if (url.includes('kuaishou')) {
-      console.log('抖音数据：', url);
-      const item = await getDataKkuz(url);
-      data.push(item);
+      await action(url, '快手', getDataKkuz);
+    } else if (url.includes('ixigua')) {
+      await action(url, '西瓜', getDataXigx);
+    } else if (url.includes('bilibili') || url.includes('.tv')) {
+      await action(url, 'b站', getDataB);
     } else {
       console.log('啥也不是的地址：', url);
+    }
+  }
+
+  async function action(url, str, method) {
+    try {
+      console.log(str, url);
+      const item = await method(url);
+      data.push(item);
+    } catch (error) {
+      console.log('=====================', error);
+      data.push(['=============================又报错了：', url]);
     }
   }
 }
@@ -111,6 +122,80 @@ async function getDataKkuz(url) {
     await sleep();
     if (name) {
       return [name, fans, like, title, date, url];
+    }
+    return ['报错了：', url];
+  } catch (error) {
+    console.error('有条数据报错了：', url, error.message);
+    await sleep();
+    return ['报错了：', url];
+  }
+}
+
+// 西瓜
+async function getDataXigx(url) {
+  await page.goto(url);
+  try {
+    const body = await page.$('body');
+    await sleep();
+    // 用户信息模块
+    const name = await body.$eval(
+      '.author__userName',
+      (node) => node.innerText
+    );
+    const like = await body.$eval(
+      '.video_action_item--like',
+      (node) => node.innerText
+    );
+    const fans = await body.$eval(
+      '.author_statics span',
+      (node) => node.innerText
+    );
+    // 视频信息模块
+    const title = await body.$eval('.videoTitle', (node) => node.innerText);
+    const date = await body.$eval(
+      '.videoDesc__publishTime',
+      (node) => node.innerText
+    );
+    await sleep();
+    console.log([name, fans, like, title, date, url]);
+    if (name) {
+      return [name, fans, like, title, date, url];
+    }
+    return ['报错了：', url];
+  } catch (error) {
+    console.error('有条数据报错了：', url, error.message);
+    await sleep();
+    return ['报错了：', url];
+  }
+}
+
+// b站
+async function getDataB(url) {
+  await page.goto(url);
+  try {
+    const body = await page.$('body');
+    // 用户信息模块
+    const name = await body.$eval('.username', (node) => node.innerText);
+    const like = await body.$eval(
+      'span.like .info-text',
+      (node) => node.innerText
+    );
+    const fans = await body.$eval('.has-charge', (node) =>
+      parseInt(node.innerText.split('关注')[1])
+    );
+    // 视频信息模块
+    const title = await body.$eval('.video-title', (node) => node.innerText);
+    const date = await body.$eval(
+      '.pudate-text',
+      (node) => `发布时间${node.innerText}`
+    );
+    const playNum = await body.$eval(
+      '.video-data-list .view',
+      (node) => node.innerText
+    );
+    await sleep();
+    if (name) {
+      return [name, fans, like, title, date, url, playNum];
     }
     return ['报错了：', url];
   } catch (error) {
