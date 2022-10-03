@@ -9,12 +9,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间', '地址', '播放量'];
 const data = [sheetHead];
 // 浏览器
-const browers = await puppeteer.connect({
-  browserWSEndpoint:
-    'ws://127.0.0.1:9222/devtools/browser/2f8363cd-926e-498c-b270-999708b3dd98',
-});
+const browers = await puppeteer.launch({ headless: false });
+// const browers = await puppeteer.connect({
+//   browserWSEndpoint:
+//     'ws://127.0.0.1:9222/devtools/browser/2f8363cd-926e-498c-b270-999708b3dd98',
+// });
 const page = await browers.newPage();
-page.setViewport({ width: 800, height: 800 });
+page.setViewport({ width: 1800, height: 1600 });
 
 // 主程序
 (async function () {
@@ -83,7 +84,7 @@ function createXlsx(data) {
 // 根据url获取单页数据 抖音
 async function getDataDzyb(url) {
   await page.goto(url);
-  await sleep(5000);
+
   try {
     const body = await page.$('body');
     // 用户信息模块
@@ -93,7 +94,7 @@ async function getDataDzyb(url) {
     // 视频信息模块
     const videoInfo = await body.$('div[data-e2e="detail-video-info"]');
     const like = await videoInfo.$eval('.CE7XkkTw', (node) => node.innerText);
-    const title = await videoInfo.$eval('.new-pmd', (node) => node.innerText);
+    const title = await videoInfo.$eval('h1', (node) => node.innerText);
     const date = await videoInfo.$eval('.aQoncqRg', (node) => node.innerText);
     await sleep();
     return [name, fans, like, title, date, url];
@@ -106,7 +107,7 @@ async function getDataDzyb(url) {
 // 快手
 async function getDataKkuz(url) {
   await page.goto(url);
-  await sleep(5000);
+
   try {
     const body = await page.$('body');
     // 用户信息模块
@@ -140,7 +141,7 @@ async function getDataKkuz(url) {
 // 西瓜
 async function getDataXigx(url) {
   await page.goto(url);
-  await sleep(5000);
+
   try {
     const body = await page.$('body');
     await sleep();
@@ -179,7 +180,7 @@ async function getDataXigx(url) {
 // b站
 async function getDataB(url) {
   await page.goto(url);
-  await sleep(5000);
+
   try {
     const body = await page.$('body');
     // 用户信息模块
@@ -218,7 +219,7 @@ async function getDataXnhsuu(url) {
   await page.emulate(iPhone);
   await sleep();
   await page.goto(url);
-  await sleep(5000);
+
   try {
     const body = await page.$('body');
     // 用户信息模块
