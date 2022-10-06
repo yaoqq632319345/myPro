@@ -10,6 +10,7 @@ const sheetHead = ['昵称', '粉丝', '获赞', '标题', '时间', '地址', '
 const data = [sheetHead];
 // 浏览器
 const browers = await puppeteer.launch({ headless: false });
+// /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
 // const browers = await puppeteer.connect({
 //   browserWSEndpoint:
 //     'ws://127.0.0.1:9222/devtools/browser/2f8363cd-926e-498c-b270-999708b3dd98',
